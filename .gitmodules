@@ -1,6 +1,0 @@
-[submodule "ecotaxa_back"]
-	path = ecotaxa_back
-	url = https://github.com/ecotaxa/ecotaxa_back
-[submodule "ecotaxa_front"]
-	path = ecotaxa_front
-	url = https://github.com/ecotaxa/ecotaxa_front
