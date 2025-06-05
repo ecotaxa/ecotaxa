@@ -15,7 +15,7 @@ psql -U postgres -d dbname -h localhost -p 5432
 ecotaxaback config file is config.ini in $PWD/back_mnt/  and ecotaxafront config file is config.cfg in $PWD/front_mnt as set in docker-compose.yml 
 
 ## Docker 
-in docker-compose.yml , modify images versions, volumes network config if you need an then run :
+in docker-compose.yml , modify images versions, volumes, network config if you need an then run :
 ```
 docker-compose up -d 
 ```
@@ -25,3 +25,19 @@ docker-compose up -d
 - ecotaxagpuback
 
 add the docker network ecotaxa subnet ip range or only the ecotaxaback container ip to the ph_hba.conf file of Postgresql
+
+### Update 
+Pull new images 
+```
+docker-compose pull 
+```
+ - build all containers 
+```
+docker-compose up --force-recreate --build -d
+
+``` 
+ - or build container by name 
+```
+docker-compose up --build ecotaxafront -d
+``` 
+
