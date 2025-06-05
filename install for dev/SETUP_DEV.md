@@ -203,7 +203,6 @@ docker run --name ecotaxa_tox -p 5440:5432 -d -e POSTGRES_PASSWORD=yourpassword 
 ``` 
 - edit pg_hba.conf  
 ```shell
-installer vim  
 docker exec -it ecotaxa_tox /bin/bash  
 apt-get update  
 apt-get install vim cd /var/lib/postgresql/data  
