@@ -125,7 +125,9 @@ source venv/bin/activate
 ```  
 - Install libraries with a modified version of pip  : https://bootstrap.pypa.io/get-pip.py  
 ```shell  
-wget https://bootstrap.pypa.io/get-pip.pypython3.8 get-pip.pypython3.8 -m pip install -r requirements.txt
+wget https://bootstrap.pypa.io/get-pip.py
+python3.8 get-pip.py
+python3.8 -m pip install -r requirements.txt
 ```  
 - Create a `config.cfg` file in `~/ecotaxa_front/config/` with the following contents (update `BACKEND_URL` with the correct value of `APP_PORT` if necessary) :  
 ``` ini  
@@ -219,7 +221,7 @@ PYTHONPATH=. POSTGRES_HOST=localhost POSTGRES_PORT=5440 tox
 ```  
 - Once the tests are complete, the temporary database can be stopped.  
 ```shell 
-docker stop ecotaxa_tox#docker rm ecotaxa_tox  
+docker stop ecotaxa_tox 
 ```  
   
 The swagger <ROOTURL>/docs page can be used to test endpoints without too much configuration effort.  
@@ -249,11 +251,14 @@ To be able to run predictions, you need to run the `gpu_jobs_runner.py` script, 
   
 - Virtual environment creation  
 ```shell
-cd ~/ecotaxa_back/pypython3.8 -m venv gpu_venvsource gpu_venv/bin/activate
+cd ~/ecotaxa_back/py
+python3.8 -m venv gpu_venv
+source gpu_venv/bin/activate
 ```  
 - Installation of the libraries required for `gpu_jobs_runner.py`.  
 ```shell
-pip3 install --upgrade pip wheelpip3 install -r gpu_jobs_reqs.txt
+pip3 install --upgrade pip wheel
+pip3 install -r gpu_jobs_reqs.txt
 ```  
   
 ## Launch a prediction  

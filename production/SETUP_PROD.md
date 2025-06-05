@@ -2,12 +2,12 @@
 ## Postgresql and extensions
 Postgresql (version 14.18) 
 ```
-psql -U postgres -d ecotaxa -h localhost -p 5432
+psql -U postgres -d dbname -h localhost -p 5432
 ```
 - pg_repack 
     cron of pg_repack 
     ```
-    0 23 * * 6 pg_repack -U postgres -d ecotaxa -h localhost -p 5432 -E DEBUG
+    0 23 * * 6 pg_repack -U postgres -d dbname -h localhost -p 5432 -E DEBUG
     ```
 - pgvector https://github.com/pgvector/pgvector
 
