@@ -1,0 +1,76 @@
+version: "3.5"
+services:
+  ecotaxafront:
+    image: ecotaxa/ecotaxa_front:latest
+    container_name: ecotaxafront
+    volumes:
+      - $PWD/front_mnt:/app/config
+    security_opt:
+      - seccomp:unconfined
+    restart: unless-stopped
+    ports:
+      - "3030:3030"
+    networks:
+      ecotaxa:
+        ipv4_address: 172.22.0.3
+    depends_on:
+      - ecotaxaback
+  ecotaxaback:
+    image: ecotaxa/ecotaxa_back:latest
+    container_name: ecotaxaback
+    volumes:
+      - $PWD/back_mnt/config.ini:/config.ini
+      - $PWD/ecotaxa:/home/ecotaxa/ecotaxa
+      - /var/run/postgresql:/var/run/postgresql
+      - /ecotaxa_import_area:/ecotaxa_import_area
+      - /remote:/remote
+      - /eco_data:/eco_data
+      - /eco_data/remote_complex_vault:/eco_data/remote_complex_vault
+      - /home/ecotaxa/ecotaxa/eco_users_files:/eco_users_files
+    security_opt:
+      - seccomp:unconfined
+    restart: unless-stopped
+    user: "33:33"
+    ports:
+      - "8000:8000"
+    environment:
+      - "WEB_CONCURRENCY=16"
+    networks:
+      ecotaxa:
+        ipv4_address: 172.22.0.2
+  ecotaxagpuback:
+    image: ecotaxa/ecotaxa_gpu_back:latest
+    container_name: ecotaxagpuback
+    restart: unless-stopped
+    volumes:
+      - $PWD/back_mnt/config.ini:/config.ini
+      - $PWD/ecotaxa:/home/ecotaxa/ecotaxa
+      - /var/run/postgresql:/var/run/postgresql
+      - /ecotaxa_import_area:/ecotaxa_import_area
+      - /remote:/remote
+      - /eco_data:/eco_data
+    security_opt:
+      - seccomp:unconfined
+    user: "33:33"
+    networks:
+      ecotaxa:
+        ipv4_address: 172.22.0.4
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+networks:
+  ecotaxa:
+    driver: bridge
+    name: ecotaxa
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
+
+
+
