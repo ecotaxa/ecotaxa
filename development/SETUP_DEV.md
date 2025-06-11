@@ -205,7 +205,8 @@ docker run --name ecotaxa_tox -p 5440:5432 -d -e POSTGRES_PASSWORD=yourpassword 
 ```shell
 docker exec -it ecotaxa_tox /bin/bash  
 apt-get update  
-apt-get install vim cd /var/lib/postgresql/data  
+apt-get install vim
+cd /var/lib/postgresql/data  
 vi pg_hba.conf  #remplacer scram-sha-256 par md5  
 vi postgresql.conf #remplacer password_encryption scram-sha-256 par md5  
 ```
