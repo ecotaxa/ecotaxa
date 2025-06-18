@@ -38,6 +38,6 @@ docker-compose up --force-recreate --build -d
 ``` 
  - or build container by name 
 ```
-docker-compose up --build ecotaxafront -d
+docker-compose up --no-deps --build ecotaxafront -d
 ``` 
 
